@@ -27,4 +27,8 @@
         android:id="@+id/login"
         android:title="Log In"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/logout"
+        android:title="Log Out"
+        app:showAsAction="never" />
 </menu>

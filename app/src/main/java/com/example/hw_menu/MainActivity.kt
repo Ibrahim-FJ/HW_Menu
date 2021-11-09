@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 
 class MainActivity : AppCompatActivity() {
+    var isSelected = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
         menuInflater.inflate(R.menu.menu_item, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -33,11 +34,23 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.login -> {
-                item.title = "Log Out"
+                isSelected = false
             }
-
+            R.id.logout -> isSelected = true
 
             else -> super.onOptionsItemSelected(item)
+        }
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+
+        if (isSelected) {
+            menu?.findItem(R.id.login)?.isVisible = true
+            menu?.findItem(R.id.logout)?.isVisible = false
+        } else {
+            menu?.findItem(R.id.login)?.isVisible = false
+            menu?.findItem(R.id.logout)?.isVisible = true
         }
         return true
     }
